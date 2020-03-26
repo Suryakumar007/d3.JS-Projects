@@ -1,0 +1,66 @@
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <title>Roman Numeral Conversion</title>
+
+    </head>
+
+    <body>
+
+        <script>
+
+
+            const req = new XMLHttpRequest();
+            req.open("GET",'https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json', true);
+            req.send();
+            req.onload=function(){
+            const dataset= JSON.parse(req.responseText);
+            //document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
+            //console.log(dataset.data[0][1])
+            ;}
+
+
+            const w = 500;
+            const h = 500;
+            const padding = 60;
+        
+            const xScale = d3.scaleLinear()
+                             .domain([0, d3.max(dataset.data, (d) => d[0])])
+                             .range([padding, w - padding]);
+        
+            const yScale = d3.scaleLinear()
+                             .domain([0, d3.max(dataset.data, (d) => d[1])])
+                             .range([h - padding, padding]);
+        
+            const svg = d3.select("body")
+                          .append("svg")
+                          .attr("width", w)
+                          .attr("height", h);
+
+            svg.selectAll("rect")
+            .data(dataset.data)
+            .enter()
+            .append("rect")
+            .attr("x", (d, i) => i * 30)
+            .attr("y", (d, i) => h - 3 * d)
+            .attr("width", 25)
+            .attr("height", (d, i) => d * 3)
+            .attr("fill", "navy")
+            .attr("class", "bar")
+
+
+        </script>
+
+    </body>
+
+</html>
