@@ -1,0 +1,72 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+
+    <div style="position: absolute;top: 8px;left: 8px;">
+
+        <canvas id="line-chart" style="width: 700px; height: 450px;"></canvas>
+
+    
+    </div>
+
+    
+    <script>
+        new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: ["17 Mar","18 Mar","19 Mar","20 Mar","21 Mar","22 Mar","23 Mar","24 Mar","25 Mar",
+    "26 Mar","27 Mar","28 Mar","29 Mar","30 Mar","31 Mar"],
+    datasets: [{ 
+        data: [1,1,2,3,3,7,9,15,23,26,35,39],
+        label: "Patients tested Positive",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [0,0,1,1,1,1,1,1,1,1,1,1],
+        label: "Discharged Patients",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [0,0,0,0,0,0,0,0,1,1,1],
+        label: "Patients dead",
+        borderColor: "#3cba9f",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    maintainAspectRatio:false,
+    responsive:true,
+    title: {
+      display: true,
+      text: 'COVID-19 status in Tamilnadu'
+    },
+    scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Date ---->'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Number of Persons--->'
+						},
+						ticks: {
+							min: 0,
+							max: 60,
+
+							// forces step size to be 5 units
+							stepSize: 5
+						}
+					}]
+				}
+  }
+});
+
+    </script>
+</html>
